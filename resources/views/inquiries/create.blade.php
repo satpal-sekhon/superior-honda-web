@@ -70,7 +70,8 @@
 
     <!-- Start form section -->
     <div class="container container-width">
-        <form>
+        <form method="post" action="{{ route('inquiries.store') }}" class="md-float-material form-material">
+            @csrf
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group row">
@@ -281,13 +282,13 @@
                         <div class="form-check form-check-inline col-sm-2">
                             <label class="form-check-label">
                                 <input class="form-check-input status-checkbox" type="checkbox"
-                                    name="{{ strtolower(str_replace(' ', '_', $type)) }}_status[]" value="good">
+                                    id="{{ strtolower(str_replace(' ', '_', $type)) }}_status[]" name="condition[{{ strtolower(str_replace(' ', '_', $type)) }}][]" value="good">
                             </label>
                         </div>
                         <div class="form-check form-check-inline col-sm-2">
                             <label class="form-check-label">
                                 <input class="form-check-input status-checkbox" type="checkbox"
-                                    name="{{ strtolower(str_replace(' ', '_', $type)) }}_status[]" value="defective">
+                                    id="{{ strtolower(str_replace(' ', '_', $type)) }}_status[]" name="condition[{{ strtolower(str_replace(' ', '_', $type)) }}][]" value="defective">
                             </label>
                         </div><br>
                     @endforeach
@@ -299,13 +300,13 @@
                         <div class="form-check form-check-inline col-sm-2">
                             <label class="form-check-label">
                                 <input class="form-check-input status-checkbox" type="checkbox"
-                                    name="{{ strtolower(str_replace(' ', '_', $type)) }}_status[]" value="good">
+                                    id="{{ strtolower(str_replace(' ', '_', $type)) }}_status[]" name="condition[{{ strtolower(str_replace(' ', '_', $type)) }}][]" value="good">
                             </label>
                         </div>
                         <div class="form-check form-check-inline col-sm-2">
                             <label class="form-check-label">
                                 <input class="form-check-input status-checkbox" type="checkbox"
-                                    name="{{ strtolower(str_replace(' ', '_', $type)) }}_status[]" value="defective">
+                                    id="{{ strtolower(str_replace(' ', '_', $type)) }}_status[]" name="condition[{{ strtolower(str_replace(' ', '_', $type)) }}][]" value="defective">
                             </label>
                         </div><br>
                     @endforeach
@@ -327,7 +328,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="date">Date:</label>
                         <div class="col-sm-10">
-                            <input class="form-control m-0" id="date" name="date" type="date">
+                            <input class="form-control m-0" id="date" name="sign_date" type="date">
                         </div>
                     </div>
                 </div>
@@ -340,14 +341,14 @@
                     </div>
                 </div>
             </div>
-
+            <button class="account__login--btn primary__btn mb-10" type="submit">Submit & Register</button>
         </form>
     </div>
     <script>
         $(document).ready(function() {
             $('.status-checkbox').change(function() {
-                var type = $(this).attr('name');
-                $('.status-checkbox[name="' + type + '"]').not(this).prop('checked', false);
+                var type = $(this).attr('id');
+                $('.status-checkbox[id="' + type + '"]').not(this).prop('checked', false);
             });
         });
     </script>
