@@ -298,7 +298,7 @@
                             <path  d="M15.138,8.59l-3.961,3.952L7.217,8.59,6,9.807l5.178,5.178,5.178-5.178Z" transform="translate(-6 -8.59)" fill="currentColor"/>
                         </svg>
                     </div>
-                    <div class="dropdown__categories--menu border-radius-5 active collapse show" id="categoriesAccordion">
+                    <div @class(["dropdown__categories--menu border-radius-5 collapse", "show active" => Route::is('dashboard')]) id="categoriesAccordion">
                         <ul class="d-none d-lg-block">
                             <li class="categories__menu--items">
                                 <a class="categories__menu--link" href="#">
