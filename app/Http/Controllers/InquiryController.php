@@ -29,6 +29,22 @@ class InquiryController extends Controller
      */
     public function store(Request $request)
     {
+        $productConditions = NULL;
+
+        if ($request->products != '') {
+            foreach ($request->products as $key => $product) {
+                $productConditions[] = [
+                    'product' => $key,
+                    'condition' => $product['condition']
+                ];
+            }
+        }
+
+        $request->validate([
+            'name' => 'required',
+            'date' => 'required',
+        ]);
+
         Inquiry::create([
             'name'          => $request->name,
             'date'          => $request->date,
@@ -44,7 +60,7 @@ class InquiryController extends Controller
             'dob'           => $request->dob,
             'chassis'       => $request->chassis,
             'engine'        => $request->engine,
-            'conditions'    => json_encode($request->condition),
+            'conditions'    => isset($productConditions) ? json_encode($productConditions) : NULL,
             'sign'          => $request->signature,
             'sign_date'     =>  $request->sign_date
         ]);
