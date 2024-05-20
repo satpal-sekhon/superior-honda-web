@@ -5,6 +5,7 @@ Use App\Http\Controllers\ProductController;
 Use App\Http\Controllers\AuthController;
 Use App\Http\Controllers\WishlistController;
 Use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\InquiryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (){
@@ -15,6 +16,7 @@ Route::resources([
     'products' => ProductController::class,
     'wishlists'=> WishlistController::class,
     'profile' => ProfileController::class,
+    'inquiries' => InquiryController::class
 ]);
 
 Route::get('/address', [ProfileController::class, 'address'])->name('profile.address');

@@ -104,11 +104,11 @@
                                 <a class="header__menu--link" href="#">Accesories </a>  
                             </li>
                             <li class="header__menu--items">
-                                <a class="header__menu--link" href="#">Contact </a>  
+                                <a class="header__menu--link" href="{{ route('inquiries.create') }}">Inquiry </a>  
                             </li>
                             @if(!Auth::user())
                                 <li class="header__menu--items">
-                                    <a class="header__menu--link text-white" href="{{ route('login')}}">Login/Register </a>  
+                                    <a class="header__menu--link" href="{{ route('login')}}">Login/Register </a>  
                                 </li>
                             @endif
                         </ul>
@@ -518,10 +518,10 @@
                                 </li>
                             
                                 <li class="header__menu--items">
-                                    <a class="header__menu--link text-white" href="{{route('products.index')}}">Accesories </a>  
+                                    <a class="header__menu--link text-white" href="{{route('products.index') }}">Accesories </a>  
                                 </li>
                                 <li class="header__menu--items">
-                                    <a class="header__menu--link text-white" href="#">Contact </a>  
+                                    <a class="header__menu--link text-white" href="{{ route('inquiries.create') }}">Inquiry </a>  
                                 </li>
                                
                             </ul>
@@ -567,7 +567,7 @@
 
                     <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('products.index') }}">Products</a></li>
                     <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="#">Accesories</a></li>
-                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="#">Contact</a></li>
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('inquiries.create') }}">Inquiry</a></li>
                 </ul>
                 <div class="offcanvas__account--items">
                     <a class="offcanvas__account--items__btn d-flex align-items-center" href="{{ route('login') }}">
