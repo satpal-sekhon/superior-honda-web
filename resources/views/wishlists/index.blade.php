@@ -44,7 +44,7 @@
                                                 <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="16px" height="16px"><path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"/></svg>
                                             </button>
                                             <div class="cart__thumbnail">
-                                                <a href="#"><img class="border-radius-5" src="assets/img/product/small-product/product9.webp" alt="cart-product"></a>
+                                                <a href="#"><img class="border-radius-5" src="{{ asset('assets/images/product/small-product/product9.webp') }}" alt="cart-product"></a>
                                             </div>
                                             <div class="cart__content">
                                                 <h3 class="cart__content--title h4"><a href="#">Fluids & Chemicals</a></h3>
@@ -70,7 +70,7 @@
                                                 <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="16px" height="16px"><path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"/></svg>
                                             </button>
                                             <div class="cart__thumbnail">
-                                                <a href="#"><img class="border-radius-5" src="assets/img/product/small-product/product8.webp" alt="cart-product"></a>
+                                                <a href="#"><img class="border-radius-5" src="{{ asset('assets/images/product/small-product/product8.webp') }}" alt="cart-product"></a>
                                             </div>
                                             <div class="cart__content">
                                                 <h3 class="cart__content--title h4"><a href="#">Cargo Accessories</a></h3>
@@ -96,7 +96,7 @@
                                                 <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="16px" height="16px"><path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"/></svg>
                                             </button>
                                             <div class="cart__thumbnail">
-                                                <a href="#"><img class="border-radius-5" src="assets/img/product/small-product/product7.webp" alt="cart-product"></a>
+                                                <a href="#"><img class="border-radius-5" src="{{ asset('assets/images/product/small-product/product7.webp') }}" alt="cart-product"></a>
                                             </div>
                                             <div class="cart__content">
                                                 <h3 class="cart__content--title h4"><a href="#">Engine & Drivetrain</a></h3>
@@ -122,7 +122,7 @@
                                                 <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="16px" height="16px"><path d="M 4.7070312 3.2929688 L 3.2929688 4.7070312 L 10.585938 12 L 3.2929688 19.292969 L 4.7070312 20.707031 L 12 13.414062 L 19.292969 20.707031 L 20.707031 19.292969 L 13.414062 12 L 20.707031 4.7070312 L 19.292969 3.2929688 L 12 10.585938 L 4.7070312 3.2929688 z"/></svg>
                                             </button>
                                             <div class="cart__thumbnail">
-                                                <a href="#"><img class="border-radius-5" src="assets/img/product/small-product/product6.webp" alt="cart-product"></a>
+                                                <a href="#"><img class="border-radius-5" src="{{ asset('assets/images/product/small-product/product6.webp') }}" alt="cart-product"></a>
                                             </div>
                                             <div class="cart__content">
                                                 <h3 class="cart__content--title h4"><a href="#">Motorbike Care</a></h3>
@@ -166,8 +166,8 @@
                         <article class="product__card">
                             <div class="product__card--thumbnail">
                                 <a class="product__card--thumbnail__link display-block" href="#">
-                                    <img class="product__card--thumbnail__img product__primary--img" src="assets/img/product/main-product/product1.webp" alt="product-img">
-                                    <img class="product__card--thumbnail__img product__secondary--img" src="assets/img/product/main-product/product4.webp" alt="product-img">
+                                    <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('assets/images/product/main-product/product1.webp') }}" alt="product-img') }}">
+                                    <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('assets/images/product/main-product/product4.webp') }}" alt="product-img') }}">
                                 </a>
                                 <span class="product__badge">-14%</span>
                                 <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -259,8 +259,8 @@
                         <article class="product__card">
                             <div class="product__card--thumbnail">
                                 <a class="product__card--thumbnail__link display-block" href="#">
-                                    <img class="product__card--thumbnail__img product__primary--img" src="assets/img/product/main-product/product2.webp" alt="product-img">
-                                    <img class="product__card--thumbnail__img product__secondary--img" src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                    <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('assets/images/product/main-product/product2.webp') }}" alt="product-img">
+                                    <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('assets/imaesg/product/main-product/product3.webp') }}" alt="product-img">
                                 </a>
                                 <span class="product__badge">-11%</span>
                                 <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -351,8 +351,8 @@
                         <article class="product__card">
                             <div class="product__card--thumbnail">
                                 <a class="product__card--thumbnail__link display-block" href="#">
-                                    <img class="product__card--thumbnail__img product__primary--img" src="assets/img/product/main-product/product3.webp" alt="product-img">
-                                    <img class="product__card--thumbnail__img product__secondary--img" src="assets/img/product/main-product/product1.webp" alt="product-img">
+                                    <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('assets/images/product/main-product/product3.webp') }}" alt="product-img">
+                                    <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('assets/images/product/main-product/product1.webp') }}" alt="product-img">
                                 </a>
                                 <span class="product__badge">-18%</span>
                                 <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -443,8 +443,8 @@
                         <article class="product__card">
                             <div class="product__card--thumbnail">
                                 <a class="product__card--thumbnail__link display-block" href="#">
-                                    <img class="product__card--thumbnail__img product__primary--img" src="assets/img/product/main-product/product4.webp" alt="product-img">
-                                    <img class="product__card--thumbnail__img product__secondary--img" src="assets/img/product/main-product/product2.webp" alt="product-img">
+                                    <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('assets/images/product/main-product/product4.webp') }}" alt="product-img">
+                                    <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('assets/images/product/main-product/product2.webp') }}" alt="product-img">
                                 </a>
                                 <span class="product__badge">-20%</span>
                                 <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -535,8 +535,8 @@
                         <article class="product__card">
                             <div class="product__card--thumbnail">
                                 <a class="product__card--thumbnail__link display-block" href="#">
-                                    <img class="product__card--thumbnail__img product__primary--img" src="assets/img/product/main-product/product1.webp" alt="product-img">
-                                    <img class="product__card--thumbnail__img product__secondary--img" src="assets/img/product/main-product/product3.webp" alt="product-img">
+                                    <img class="product__card--thumbnail__img product__primary--img" src="{{ asset('assets/images/product/main-product/product1.webp') }}" alt="product-img">
+                                    <img class="product__card--thumbnail__img product__secondary--img" src="{{ asset('assets/images/product/main-product/product3.webp') }}" alt="product-img">
                                 </a>
                                 <span class="product__badge">-17%</span>
                                 <ul class="product__card--action d-flex align-items-center justify-content-center">
@@ -641,19 +641,19 @@
         <div class="container">
             <div class="brand__section--inner d-flex justify-content-between align-items-center">
                 <div class="brang__logo--items">
-                    <img class="brang__logo--img" src="assets/img/logo/brand-logo1.webp" alt="brand-logo">
+                    <img class="brang__logo--img" src="{{ asset('assets/images/logo/brand-logo1.webp') }}" alt="brand-logo">
                 </div>
                 <div class="brang__logo--items">
-                    <img class="brang__logo--img" src="assets/img/logo/brand-logo2.webp" alt="brand-logo">
+                    <img class="brang__logo--img" src="{{ asset('assets/images/logo/brand-logo2.webp') }}" alt="brand-logo">
                 </div>
                 <div class="brang__logo--items">
-                    <img class="brang__logo--img" src="assets/img/logo/brand-logo3.webp" alt="brand-logo">
+                    <img class="brang__logo--img" src="{{ asset('assets/images/logo/brand-logo3.webp') }}" alt="brand-logo">
                 </div>
                 <div class="brang__logo--items">
-                    <img class="brang__logo--img" src="assets/img/logo/brand-logo4.webp" alt="brand-logo">
+                    <img class="brang__logo--img" src="{{ asset('assets/images/logo/brand-logo4.webp') }}" alt="brand-logo">
                 </div>
                 <div class="brang__logo--items">
-                    <img class="brang__logo--img" src="assets/img/logo/brand-logo5.webp" alt="brand-logo">
+                    <img class="brang__logo--img" src="{{ asset('assets/images/logo/brand-logo5.webp') }}" alt="brand-logo">
                 </div>
             </div>
         </div>
@@ -666,7 +666,7 @@
             <div class="shipping__inner style2 d-flex">
                 <div class="shipping__items style2 d-flex align-items-center">
                     <div class="shipping__icon">  
-                        <img src="assets/img/other/shipping1.webp" alt="icon-img">
+                        <img src="{{ asset('assets/images/other/shipping1.webp') }}" alt="icon-img">
                     </div>
                     <div class="shipping__content">
                         <h2 class="shipping__content--title h3">Free Shipping</h2>
@@ -675,7 +675,7 @@
                 </div>
                 <div class="shipping__items style2 d-flex align-items-center">
                     <div class="shipping__icon">  
-                        <img src="assets/img/other/shipping2.webp" alt="icon-img">
+                        <img src="{{ asset('assets/images/other/shipping2.webp') }}" alt="icon-img">
                     </div>
                     <div class="shipping__content">
                         <h2 class="shipping__content--title h3">Support 24/7</h2>
@@ -684,7 +684,7 @@
                 </div>
                 <div class="shipping__items style2 d-flex align-items-center">
                     <div class="shipping__icon">  
-                        <img src="assets/img/other/shipping3.webp" alt="icon-img">
+                        <img src="{{ asset('assets/images/other/shipping3.webp') }}" alt="icon-img">
                     </div>
                     <div class="shipping__content">
                         <h2 class="shipping__content--title h3">100% Money Back</h2>
@@ -693,7 +693,7 @@
                 </div>
                 <div class="shipping__items style2 d-flex align-items-center">
                     <div class="shipping__icon">  
-                        <img src="assets/img/other/shipping4.webp" alt="icon-img">
+                        <img src="{{ asset('assets/images/other/shipping4.webp') }}" alt="icon-img">
                     </div>
                     <div class="shipping__content">
                         <h2 class="shipping__content--title h3">Payment Secure</h2>

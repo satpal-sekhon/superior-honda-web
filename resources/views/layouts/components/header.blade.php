@@ -687,7 +687,7 @@
         <div class="minicart__product">
             <div class="minicart__product--items d-flex">
                 <div class="minicart__thumb">
-                    <a href="#"><img src="{{ asset('assets/img/product/small-product/product1.webp') }}" alt="prduct-img"></a>
+                    <a href="#"><img src="{{ asset('assets/images/product/small-product/product1.webp') }}" alt="prduct-img"></a>
                 </div>
                 <div class="minicart__text">
                     <h4 class="minicart__subtitle"><a href="#">Car & Motorbike Care.</a></h4>
@@ -710,7 +710,7 @@
             </div>
             <div class="minicart__product--items d-flex">
                 <div class="minicart__thumb">
-                    <a href="#"><img src="assets/img/product/small-product/product2.webp" alt="prduct-img"></a>
+                    <a href="#"><img src="{{ asset('assets/images/product/small-product/product2.webp') }}" alt="prduct-img"></a>
                 </div>
                 <div class="minicart__text">
                     <h4 class="minicart__subtitle"><a href="#">Engine And Drivetrain.</a></h4>
