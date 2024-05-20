@@ -181,19 +181,28 @@
                             <li class="header__menu--items">
                                 <a class="header__menu--link" href="#">Contact </a>  
                             </li>
-                            <li class="header__menu--items">
-                                <a class="header__menu--link {{ Request::segment(1) == 'login' ? 'active' : '' }}" href="{{ route('login')}}">Login/Register </a>  
-                            </li>
+                            @if(!Auth::user())
+                                <li class="header__menu--items">
+                                    <a class="header__menu--link text-white" href="{{ route('login')}}">Login/Register </a>  
+                                </li>
+                            @endif
                         </ul>
                     </nav>
                 </div>
                 <div class="header__account header__sticky--none">
                     <ul class="header__account--wrapper d-flex align-items-center">
                         <li class="header__account--items d-none d-lg-block">
-                            <a class="header__account--btn" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                <span class="visually-hidden">My account</span> 
-                            </a>
+                            @if(Auth::user())
+                                <a class="header__account--btn" href="{{ route('profile.index') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    <span class="visually-hidden">My account</span>
+                                </a>
+                            @else
+                                <a class="header__account--btn" href="{{ route('login') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    <span class="visually-hidden">My account</span>
+                                </a>
+                            @endif
                         </li>
                         <li class="header__account--items  header__account--search__items mobile__d--block d-sm-2-none">
                             <a class="header__account--btn search__open--btn" href="javascript:void(0)" data-offcanvas>
@@ -233,10 +242,17 @@
                             </a>
                         </li>
                         <li class="header__account--items d-none d-lg-block">
-                            <a class="header__account--btn" href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                <span class="visually-hidden">My account</span> 
-                            </a>
+                            @if(Auth::user())
+                                <a class="header__account--btn" href="{{ route('profile.index') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    <span class="visually-hidden">My account</span> 
+                                </a>
+                            @else
+                                <a class="header__account--btn" href="{{ route('login') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                    <span class="visually-hidden">My account</span> 
+                                </a>
+                            @endif
                         </li>
                         <li class="header__account--items d-none d-lg-block">
                             <a class="header__account--btn" href="{{ route('wishlists.index')}}">
@@ -589,9 +605,11 @@
                     <div class="language__currency d-none d-lg-block">
                         <ul class="d-flex align-items-center">
                             <li class="language__currency--list">
-                                {{-- <li class="header__menu--items"> --}}
+                                @if(Auth::user())
+                                <a class="header__menu--link text-white" href="{{ route('logout')}}"> Logout</a>
+                                @else
                                     <a class="header__menu--link text-white" href="{{ route('login')}}">Login/Register </a>  
-                                {{-- </li> --}}
+                                @endif
                             </li>
                         </ul>
                     </div>
