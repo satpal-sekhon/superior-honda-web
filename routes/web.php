@@ -3,6 +3,7 @@
 Use App\Http\Controllers\DashboardController;
 Use App\Http\Controllers\ProductController;
 Use App\Http\Controllers\AuthController;
+use App\Http\Controllers\InspectionController;
 Use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,3 +17,4 @@ Route::resources([
 ]);
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/inspection', [InspectionController::class, 'login'])->name('login');
