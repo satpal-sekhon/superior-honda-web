@@ -1,10 +1,10 @@
 <?php
 
-Use App\Http\Controllers\DashboardController;
 Use App\Http\Controllers\ProductController;
 Use App\Http\Controllers\AuthController;
-use App\Http\Controllers\InspectionController;
 Use App\Http\Controllers\WishlistController;
+Use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\InquiryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (){
@@ -13,8 +13,13 @@ Route::get('/', function (){
 
 Route::resources([
     'products' => ProductController::class,
-    'wishlists'=> WishlistController::class
+    'wishlists'=> WishlistController::class,
+    'profile' => ProfileController::class,
+    'inquiries' => InquiryController::class
 ]);
 
+Route::get('/address', [ProfileController::class, 'address'])->name('profile.address');
+
 Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/inspection', [InspectionController::class, 'login'])->name('login');
+Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

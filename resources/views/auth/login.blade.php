@@ -21,7 +21,6 @@
     <!-- Start login section  -->
     <div class="login__section section--padding">
         <div class="container">
-            <form action="#">
                 <div class="login__section--inner">
                     <div class="row row-cols-md-2 row-cols-1">
                         <div class="col">
@@ -31,22 +30,25 @@
                                     <p class="account__login--header__desc">Login if you area a returning customer.</p>
                                 </div>
                                 <div class="account__login--inner">
-                                    <label>
-                                        <input class="account__login--input" placeholder="Email Addres" type="email">
-                                    </label>
-                                    <label>
-                                        <input class="account__login--input" placeholder="Password" type="password">
-                                    </label>
-                                    <div class="account__login--remember__forgot mb-15 d-flex justify-content-between align-items-center">
-                                        <div class="account__login--remember position__relative">
-                                            <input class="checkout__checkbox--input" id="check1" type="checkbox">
-                                            <span class="checkout__checkbox--checkmark"></span>
-                                            <label class="checkout__checkbox--label login__remember--label" for="check1">
-                                                Remember me</label>
+                                    <form method="POST" action="{{ route('authenticate') }}" class="md-float-material form-material">
+                                        @csrf
+                                        <label>
+                                            <input class="account__login--input" name="email" placeholder="Email Addres" type="email">
+                                        </label>
+                                        <label>
+                                            <input class="account__login--input" name="password" placeholder="Password" type="password">
+                                        </label>
+                                        <div class="account__login--remember__forgot mb-15 d-flex justify-content-between align-items-center">
+                                            <div class="account__login--remember position__relative">
+                                                <input class="checkout__checkbox--input" id="check1" type="checkbox">
+                                                <span class="checkout__checkbox--checkmark"></span>
+                                                <label class="checkout__checkbox--label login__remember--label" for="check1">
+                                                    Remember me</label>
+                                            </div>
+                                            <button class="account__login--forgot"  type="submit">Forgot Your Password?</button>
                                         </div>
-                                        <button class="account__login--forgot"  type="submit">Forgot Your Password?</button>
-                                    </div>
-                                    <button class="account__login--btn primary__btn" type="submit">Login</button>
+                                        <button class="account__login--btn primary__btn" type="submit">Login</button>
+                                    </form>
                                     <div class="account__login--divide">
                                         <span class="account__login--divide__text">OR</span>
                                     </div>
@@ -90,7 +92,6 @@
                         </div>
                     </div>
                 </div>
-            </form>
         </div>     
     </div>
     <!-- End login section  -->
