@@ -3,34 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 
-class AuthController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function login()
+    public function index()
     {
-        return view('auth.login');
+        return view('profile.index');
     }
 
-    public function authenticate(Request $request): RedirectResponse
+    public function address()
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
-
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/');
-        }
-
-        return back()->withErrors([
-            'message' => 'The provided credentials do not match our records.',
-        ]);
+        return view('profile.address');
     }
 
     /**
@@ -79,13 +65,5 @@ class AuthController extends Controller
     public function destroy(string $id)
     {
         //
-    }
-
-    public function logout(Request $request): RedirectResponse
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('login');
     }
 }
