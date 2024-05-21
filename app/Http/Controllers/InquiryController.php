@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Inquiry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InquiryController extends Controller
 {
@@ -28,7 +29,43 @@ class InquiryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $productConditions = NULL;
+
+        if ($request->products != '') {
+            foreach ($request->products as $key => $product) {
+                $productConditions[] = [
+                    'product' => $key,
+                    'condition' => $product['condition']
+                ];
+            }
+        }
+
+        $request->validate([
+            'name' => 'required',
+            'date' => 'required',
+        ]);
+
+        Inquiry::create([
+            'name'          => $request->name,
+            'date'          => $request->date,
+            'mileage'       => $request->mileage,
+            'vehicle'       => $request->vehicle,
+            'year'          => $request->year,
+            'lic_no'        => $request->lic_no,
+            'address'       => $request->address,
+            'returning'     => $request->returning,
+            'color'         => $request->color,
+            'tel_digicel'   => $request->tel_digicel,
+            'tel_lime'      => $request->tel_lime,
+            'dob'           => $request->dob,
+            'chassis'       => $request->chassis,
+            'engine'        => $request->engine,
+            'conditions'    => isset($productConditions) ? json_encode($productConditions) : NULL,
+            'sign'          => $request->signature,
+            'sign_date'     =>  $request->sign_date
+        ]);
+
+        return redirect()->route('inquiries.create');
     }
 
     /**

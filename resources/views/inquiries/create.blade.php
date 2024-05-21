@@ -7,13 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Inquiry Form</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
+    <script src="{{ asset('assets/js/plugins/jquery.validate.min.js') }}"></script>
     <style>
         .breadcrumb__section {
             background-color: #f5f5f5;
@@ -70,7 +73,8 @@
 
     <!-- Start form section -->
     <div class="container container-width">
-        <form>
+        <form method="post" action="{{ route('inquiries.store') }}" class="md-float-material form-material">
+            @csrf
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group row">
@@ -84,7 +88,8 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="date">Date:</label>
                         <div class="col-sm-10">
-                            <input class="form-control m-0" id="date" name="date" type="date">
+                            <input type="text" name="date" class="form-control m-0" id="datepicker">
+                            {{-- <input class="form-control m-0" id="date" name="date" type="date"> --}}
                         </div>
                     </div>
                 </div>
@@ -186,7 +191,9 @@
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label" for="dob">Date of Birth:</label>
                         <div class="col-sm-9">
-                            <input class="form-control m-0" id="dob" name="dob" type="date">
+                            <input type="text" class="form-control m-0" id="date"  name="dob">
+
+                            {{-- <input class="form-control m-0" id="dob" name="dob" type="date"> --}}
                         </div>
                     </div>
                 </div>
@@ -275,37 +282,42 @@
 
             <div class="row">
                 <div class="col-md-6 form-group">
-                    @php $types1 = ['Horn', 'Carpet', 'Battery', 'Battery Clamps', 'Left Headlight', 'Right Headlight', 'Left Indicator', 'Right Front Fender', 'Left Front Fender', 'Right Front Door', 'Left Front Door', 'Left Rear Door', 'Right Rear Door', 'Left Tail Lamp', 'Right Tail Lamp', 'Hub Caps', 'Cigarette Lighter', 'Grill']; @endphp
-                    @foreach ($types1 as $type)
-                        <label class="col-sm-6">{{ $type }}</label>
+                    @php
+                        $products1 = ['Horn', 'Carpet', 'Battery', 'Battery Clamps', 'Left Headlight', 'Right Headlight', 'Left Indicator', 'Right Front Fender', 'Left Front Fender', 'Right Front Door', 'Left Front Door', 'Left Rear Door', 'Right Rear Door', 'Left Tail Lamp', 'Right Tail Lamp', 'Hub Caps', 'Cigarette Lighter', 'Grill'];
+                    @endphp
+                    @foreach ($products1 as $key => $product)
+                    <div class="form-group">
+                        <label class="col-sm-6">{{ $product }}</label>
                         <div class="form-check form-check-inline col-sm-2">
                             <label class="form-check-label">
-                                <input class="form-check-input status-checkbox" type="checkbox"
-                                    name="{{ strtolower(str_replace(' ', '_', $type)) }}_status[]" value="good">
+                                <input class="form-check-input status-checkbox" id="{{ strtolower(str_replace(' ', '_', $product)) }}_status[]" type="checkbox" name="products[{{ strtolower(str_replace(' ', '_', $product)) }}][condition]" value="good">
                             </label>
                         </div>
                         <div class="form-check form-check-inline col-sm-2">
                             <label class="form-check-label">
-                                <input class="form-check-input status-checkbox" type="checkbox"
-                                    name="{{ strtolower(str_replace(' ', '_', $type)) }}_status[]" value="defective">
+                                <input class="form-check-input status-checkbox" id="{{ strtolower(str_replace(' ', '_', $product)) }}_status[]" type="checkbox" name="products[{{ strtolower(str_replace(' ', '_', $product)) }}][condition]" value="defective">
                             </label>
-                        </div><br>
+                        </div>
+                    </div>
                     @endforeach
                 </div>
                 <div class="col-md-6 form-group">
-                    @php $types2 = ['Reverse Light', 'Rear Door or Trunk', 'Window Functions', 'Oil Cap', 'Left Quarter Panel', 'Right Quarter Panel', 'Front Bumper', 'Rear Bumper', 'Left Wing Mirror', 'Right Wing Mirror', 'Rims', 'Interior Lights', 'Seats', 'Door Pulls', 'Rear Windshield', 'Front Windshield', 'Spare Tire', 'Jack & Handle', 'Wipers & Washer Jets']; @endphp
-                    @foreach ($types2 as $key => $type)
-                        <label class="col-sm-6">{{ $type }}</label>
+                    @php
+                        $products2 = ['Reverse Light', 'Rear Door or Trunk', 'Window Functions', 'Oil Cap', 'Left Quarter Panel', 'Right Quarter Panel', 'Front Bumper', 'Rear Bumper', 'Left Wing Mirror', 'Right Wing Mirror', 'Rims', 'Interior Lights', 'Seats', 'Door Pulls', 'Rear Windshield', 'Front Windshield', 'Spare Tire', 'Jack & Handle', 'Wipers & Washer Jets'];
+                    @endphp
+
+                    @foreach ($products2 as $key => $product)
+                        <label class="col-sm-6">{{ $product }}</label>
                         <div class="form-check form-check-inline col-sm-2">
                             <label class="form-check-label">
                                 <input class="form-check-input status-checkbox" type="checkbox"
-                                    name="{{ strtolower(str_replace(' ', '_', $type)) }}_status[]" value="good">
+                                    id="{{ strtolower(str_replace(' ', '_', $product)) }}_status[]" name="products[{{ strtolower(str_replace(' ', '_', $product)) }}][condition]" value="good">
                             </label>
                         </div>
                         <div class="form-check form-check-inline col-sm-2">
                             <label class="form-check-label">
                                 <input class="form-check-input status-checkbox" type="checkbox"
-                                    name="{{ strtolower(str_replace(' ', '_', $type)) }}_status[]" value="defective">
+                                    id="{{ strtolower(str_replace(' ', '_', $product)) }}_status[]" name="products[{{ strtolower(str_replace(' ', '_', $product)) }}][condition]" value="defective">
                             </label>
                         </div><br>
                     @endforeach
@@ -327,7 +339,7 @@
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label" for="date">Date:</label>
                         <div class="col-sm-10">
-                            <input class="form-control m-0" id="date" name="date" type="date">
+                            <input class="form-control m-0 datepicker" id="text" name="sign_date" type="text">
                         </div>
                     </div>
                 </div>
@@ -340,14 +352,40 @@
                     </div>
                 </div>
             </div>
-
+            <button class="btn btn-primary mb-10" type="submit">Save</button>
         </form>
     </div>
     <script>
         $(document).ready(function() {
             $('.status-checkbox').change(function() {
-                var type = $(this).attr('name');
-                $('.status-checkbox[name="' + type + '"]').not(this).prop('checked', false);
+                var type = $(this).attr('id');
+                $('.status-checkbox[id="' + type + '"]').not(this).prop('checked', false);
+            });
+
+            $('#datepicker').datepicker();
+            $('#date').datepicker();
+            $('.datepicker').datepicker();
+
+            $('form').validate({
+                rules: {
+                    name: "required",
+                    date: "required",
+                },
+                messages: {
+                    name: "Please enter name",
+                    date: "Please enter date",
+                },
+                errorClass: "text-danger f-12",
+                errorElement: "span",
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass("form-control-danger");
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass("form-control-danger");
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
             });
         });
     </script>
