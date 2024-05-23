@@ -64,7 +64,7 @@
                                 <div class="card">
                                     <img src="{{ asset('assets/images/cards/card1.jpg')}}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
+                                        <h2 class="card-title">Maintenance</h2>
                                         <p class="card-text">Some quick example text to build on the card title and make up the
                                             bulk of the card's content.</p>
                                         <a href="#">Read more <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,7 +77,7 @@
                                 <div class="card">
                                     <img src="{{ asset('assets/images/cards/card2.jpg')}}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
+                                        <h2 class="card-title">Fine Tuning</h2>
                                         <p class="card-text">Some quick example text to build on the card title and make up the
                                             bulk of the card's content.</p>
                                             <a href="#">Read more <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -90,7 +90,7 @@
                                 <div class="card">
                                     <img src="{{ asset('assets/images/cards/card3.jpg')}}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
+                                        <h2 class="card-title">Computer Diagnostics</h2>
                                         <p class="card-text">Some quick example text to build on the card title and make up the
                                             bulk of the card's content.</p>
                                             <a href="#">Read more <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +106,7 @@
                                 <div class="card">
                                     <img src="{{ asset('assets/images/cards/card4.jpg')}}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
+                                        <h2 class="card-title">Modification</h2>
                                         <p class="card-text">Some quick example text to build on the card title and make up the
                                             bulk of the card's content.</p>
                                             <a href="#">Read more <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -119,7 +119,7 @@
                                 <div class="card">
                                     <img src="{{ asset('assets/images/cards/card5.jpg')}}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
+                                        <h2 class="card-title">Audio & AC</h2>
                                         <p class="card-text">Some quick example text to build on the card title and make up the
                                             bulk of the card's content.</p>
                                             <a href="#">Read more <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +132,7 @@
                                 <div class="card">
                                     <img src="{{ asset('assets/images/cards/card6.jpg')}}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
+                                        <h2 class="card-title">Balancing</h2>
                                         <p class="card-text">Some quick example text to build on the card title and make up the
                                             bulk of the card's content.</p>
                                             <a href="#">Read more <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
