@@ -43,12 +43,6 @@
                 <img class="banner-image" src="{{ asset('assets/images/banner/banner-service.webp') }}" alt="slider-img">
             </div>
 
-
-            <!-- End breadcrumb section -->
-
-            <!-- End breadcrumb section -->
-
-            <!-- Start product section -->
             <section class="product__section section--padding">
                 <div class="container">
                     <div class="section__heading border-bottom mb-30">
