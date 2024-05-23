@@ -28,9 +28,7 @@ class AuthController extends Controller
             return redirect()->intended('/');
         }
 
-        return back()->withErrors([
-            'message' => 'The provided credentials do not match our records.',
-        ]);
+        return back()->with('message','The provided credentials do not match our records.');
     }
 
     /**
