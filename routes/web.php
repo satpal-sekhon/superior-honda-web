@@ -5,6 +5,7 @@ Use App\Http\Controllers\AuthController;
 Use App\Http\Controllers\WishlistController;
 Use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InquiryController;
+use App\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (){
@@ -15,10 +16,12 @@ Route::resources([
     'products' => ProductController::class,
     'wishlists'=> WishlistController::class,
     'profile' => ProfileController::class,
-    'inquiries' => InquiryController::class
+    'inquiries' => InquiryController::class,
+    'addresses'=> AddressController::class
 ]);
 
-Route::get('/address', [ProfileController::class, 'address'])->name('profile.address');
+//Route::get('/address', [ProfileController::class, 'address'])->name('profile.address');
+//Route::view('/add-new-address','profile.add-address')->name('profile.addnewaddress');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
