@@ -106,6 +106,9 @@
                             <li class="header__menu--items">
                                 <a class="header__menu--link" href="{{ route('inquiries.create') }}">Inquiry </a>  
                             </li>
+                            <li class="header__menu--items">
+                                <a class="header__menu--link" href="{{ route('services.index') }}">Services </a>  
+                            </li>
                             @if(!Auth::user())
                                 <li class="header__menu--items">
                                     <a class="header__menu--link" href="{{ route('login')}}">Login/Register </a>  
@@ -518,12 +521,14 @@
                                 </li>
                             
                                 <li class="header__menu--items">
-                                    <a class="header__menu--link text-white" href="{{route('products.index') }}">Accesories </a>  
+                                    <a class="header__menu--link text-white" href="#">Accesories </a>  
                                 </li>
                                 <li class="header__menu--items">
                                     <a class="header__menu--link text-white" href="{{ route('inquiries.create') }}">Inquiry </a>  
                                 </li>
-                               
+                                <li class="header__menu--items">
+                                    <a class="header__menu--link text-white" href="{{ route('services.index') }}">Services </a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -568,6 +573,7 @@
                     <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('products.index') }}">Products</a></li>
                     <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="#">Accesories</a></li>
                     <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('inquiries.create') }}">Inquiry</a></li>
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('services.index') }}">Services </a></li>
                 </ul>
                 <div class="offcanvas__account--items">
                     <a class="offcanvas__account--items__btn d-flex align-items-center" href="{{ route('login') }}">

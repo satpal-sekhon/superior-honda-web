@@ -6,6 +6,7 @@ Use App\Http\Controllers\WishlistController;
 Use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (){
@@ -13,10 +14,11 @@ Route::get('/', function (){
 })->name('dashboard');
 
 Route::resources([
-    'products' => ProductController::class,
-    'wishlists'=> WishlistController::class,
-    'profile' => ProfileController::class,
+    'products'  => ProductController::class,
+    'wishlists' => WishlistController::class,
+    'profile'   => ProfileController::class,
     'inquiries' => InquiryController::class,
+    'services'  => ServiceController::class,
     'addresses'=> AddressController::class
 ]);
 
