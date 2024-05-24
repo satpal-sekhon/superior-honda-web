@@ -29,6 +29,7 @@
                     <ul class="account__menu">
                         <li class="account__menu--list"><a href="{{ route('profile.index')}}">Dashboard</a></li>
                         <li class="account__menu--list active"><a href="{{ route('addresses.index')}}">Addresses</a></li>
+                        <li class="account__menu--list"><a href="{{ route('vehicles.index')}}">Vehicles</a></li>
                         <li class="account__menu--list"><a href="{{ route('wishlists.index')}}">Wishlist</a></li>
                         <li class="account__menu--list"><a href="{{ route('logout') }}">Log Out</a></li>
                     </ul>
