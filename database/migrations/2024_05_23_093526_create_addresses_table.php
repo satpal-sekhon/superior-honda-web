@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('mobile_number');
             $table->string('address');
-            $table->string('state');
+            $table->integer('state_id');
             $table->string('city');
             $table->integer('postal_code');
             $table->string('nearby');
+            $table->integer('country_id');
             $table->boolean('is_default')->default(true);
             $table->timestamps();
         });

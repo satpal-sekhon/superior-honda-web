@@ -8,15 +8,29 @@
             </div>
         @endif
         <h2 class="account__content--title h3 mb-20">Addresses</h2>
-        <button class="new__address--btn primary__btn mb-25" type="button"><a href="{{ route('addresses.create') }}">Add a new address</a></button>
-        <div class="account__details two">
-            <h3 class="account__details--title h4">Default</h3>
-            <p class="account__details--desc">Admin <br> Dhaka <br> Dhaka 12119 <br> Bangladesh</p>
-            <a class="account__details--link" href="#">View Addresses (1)</a>
-        </div>
-        <div class="account__details--footer d-flex">
-            <button class="account__details--footer__btn" type="button">Edit</button>
-            <button class="account__details--footer__btn" type="button">Delete</button>
-        </div>
+        <a href="{{ route('addresses.create') }}" class="new__address--btn primary__btn mb-25">Add a new address</a>
+        @isset($addresses)
+            @foreach ($addresses as $address)
+                <div class="account__details two">
+                    @if($address->is_default == 1)
+                        <h3 class="account__details--title h4">Default</h3>
+                    @endif
+                    <p class="account__details--desc">
+                        {{ $address->full_name }} <br> 
+                        {{ $address->address }} <br> 
+                        {{ $address->city}} {{$address->postal_code }} <br> 
+                        {{ $address->state->name }}, {{$address->country->name }}
+                    </p>
+                </div>
+                <div class="account__details--footer d-flex">
+                    <a class="account__details--footer__btn" href="{{ route('addresses.edit', ['address' => $address->id]) }}">Edit</a>
+                    <button class="account__details--footer__btn delete-btn" data-source="address" data-endpoint="{{ route('addresses.destroy', $address->id) }}">Delete</button>
+                </div>
+            @endforeach
+        @else
+            <h4>No address available</h4>     
+        @endisset
     </div>
 @endsection
+
+

@@ -2,40 +2,41 @@
 
 @section('my-account')
     <div class="account__content">
-        <h2 class="account__content--title h3 mb-20">Add New Address</h2>
-        <form action="{{ route('addresses.store') }}" name="create-address" method="POST">
+        <h2 class="account__content--title h3 mb-20">Update Address</h2>
+        <form action="{{ route('addresses.update', ['address' => $address->id]) }}" name="create-address" method="POST">
             @csrf
+            @method('PUT')
             <div class="row">
                 <div class="col-md-6 mb-2">
                     <label>Full Name</label>
-                    <input type="text" name="full_name" class="form-control">
+                    <input type="text" name="full_name" class="form-control" value="{{ $address->full_name }}">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Mobile Number</label>
-                    <input type="number" name="mobile_no" class="form-control">
+                    <input type="number" name="mobile_no" class="form-control" value="{{ $address->mobile_number }}">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Address (House No., Building Name)</label>
-                    <input type="text" name="address" class="form-control">
+                    <input type="text" name="address" class="form-control" value="{{ $address->address }}">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>City</label>
-                    <input type="text" name="city" class="form-control">
+                    <input type="text" name="city" class="form-control" value="{{ $address->city }}">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Nearby Famous Shop/Mall/Landmark</label>
-                    <input type="text" name="nearby" class="form-control">
+                    <input type="text" name="nearby" class="form-control" value="{{ $address->nearby }}">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Postal Code</label>
-                    <input type="number" name="postal_code" class="form-control">
+                    <input type="number" name="postal_code" class="form-control" value="{{ $address->postal_code }}">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Country</label>
                     <select id="country" name="country_id" class="form-control">
                         <option>Select Country</option>
                         @foreach ($countries as $country)
-                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                            <option value="{{ $country->id }}" @selected($address->country_id == $country->id)> {{ $country->name }} </option>
                         @endforeach
                     </select>
                 </div>
@@ -43,10 +44,14 @@
                     <label>State</label>
                     <select id="state" name="state_id" class="form-control">
                         <option>Select State</option>
+                        @foreach ($states as $state)
+                            <option value="{{ $state->id }}" @selected($address->state_id == $state->id)>{{ $state->name }}</option>    
+                        @endforeach
                     </select>
+                    
                 </div>
                 <div class="col-md-6 mt-2">
-                    <input type="checkbox" name="is_default"  @checked(old(0, !$savedAddress)) @disabled(!$savedAddress)> Use address as default
+                    <input type="checkbox" name="is_default" @checked(old(1, $address->is_default)) @disabled($address->is_default)> Use address as default
                 </div>
             </div>
             <br />
@@ -66,8 +71,8 @@
                     city: "required",
                     postal_code: "required",
                     nearby: "required",
-                    state: "required",
-                    country: "required",
+                    state_id: "required",
+                    country_id: "required",
                 },
                 messages: {
                     full_name: "Please enter category full name",
@@ -76,8 +81,8 @@
                     city: "Please enter manufacture city",
                     postal_code: "Please enter manufacture postal code", 
                     nearby: "Please enter manufacture nearby", 
-                    state: "Please enter manufacture state", 
-                    country: "Please enter manufacture country", 
+                    state_id: "Please enter manufacture state", 
+                    country_id: "Please enter manufacture country", 
 
                 },
                 errorClass: "text-danger f-12",

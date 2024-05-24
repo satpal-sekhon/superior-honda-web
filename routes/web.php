@@ -22,7 +22,7 @@ Route::resources([
     'addresses'=> AddressController::class
 ]);
 
-//Route::get('/address', [ProfileController::class, 'address'])->name('profile.address');
+Route::get('/states/{country_id?}', [AddressController::class, 'getStates'])->name('addresses.getStates');
 //Route::view('/add-new-address','profile.add-address')->name('profile.addnewaddress');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
