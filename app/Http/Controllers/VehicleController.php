@@ -69,7 +69,15 @@ class VehicleController extends Controller
      */
     public function edit(Vehicle $vehicle)
     {
-        //
+        $vehicle = Vehicle::where('id', $vehicle->id)->first();
+
+        $categories = VehicleCategory::all();
+        $brands = VehicleBrand::all();
+        $vehicleModels = VehicleModel::all();
+        $vehicleTypes = VehicleType::all();
+        $modelVariants = VehicleModelVariant::all();
+
+        return view('vehicles.edit', compact('vehicle', 'categories', 'brands', 'vehicleModels', 'vehicleTypes','modelVariants'));
     }
 
     /**
@@ -77,7 +85,30 @@ class VehicleController extends Controller
      */
     public function update(Request $request, Vehicle $vehicle)
     {
-        //
+        $request->validate([
+            'category_id'  => 'required',
+            'vehicle_no'   => 'required',
+            'year'         => 'required'
+        ]);
+
+        $vehicle = Vehicle::where('id', $vehicle->id)->first();
+
+        $vehicle->update([
+            'cus_id'            => Auth::id(),
+            'category_id'       => $request->category_id,
+            'brand_id'          => $request->brand_name,
+            'model_id'          => $request->model_name,
+            'varient_model_id'  => $request->model_variant_name,
+            'type_id'           => $request->vehicle_type,
+            'vehicle_no'        => $request->vehicle_no,
+            'year'              => $request->year,
+            'color'             => $request->color,
+            'chasis_no'         => $request->chasis_no,
+            'engine_no'         => $request->engine_no,
+            'additional_details' => $request->additional_detail
+        ]);
+
+        return redirect()->route('vehicles.index')->with('success', 'Vehicle updated successfully');
     }
 
     /**
@@ -85,7 +116,12 @@ class VehicleController extends Controller
      */
     public function destroy(Vehicle $vehicle)
     {
-        //
+        Vehicle::where('id', $Vehicle->id)->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Vehicle deleted successfully.'
+        ]);
     }
 
     public function getVehicleBrand(Request $request)
