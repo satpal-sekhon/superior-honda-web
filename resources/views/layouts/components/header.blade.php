@@ -80,31 +80,20 @@
                 <div class="header__menu d-none d-lg-block header__sticky--block">
                     <nav class="header__menu--navigation">
                         <ul class="header__menu--wrapper d-flex">
-                            {{-- <li class="header__menu--items">
-                                <a class="header__menu--link" href="{{ route('dashboard') }}">Home 
-                                    <svg class="menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12" height="7.41" viewBox="0 0 12 7.41">
-                                        <path  d="M16.59,8.59,12,13.17,7.41,8.59,6,10l6,6,6-6Z" transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7"/>
-                                    </svg>
-                                </a>
-                                <ul class="header__sub--menu">
-                                    <li class="header__sub--menu__items"><a href="#" class="header__sub--menu__link">Home One</a></li>
-                                    <li class="header__sub--menu__items"><a href="#" class="header__sub--menu__link">Home Two</a></li>
-                                    <li class="header__sub--menu__items"><a href="#" class="header__sub--menu__link">Home Three</a></li>
-                                    <li class="header__sub--menu__items"><a href="#" class="header__sub--menu__link">Home Four</a></li>
-                                    <li class="header__sub--menu__items"><a href="#" class="header__sub--menu__link">Home Five</a></li>
-                                </ul>
-                            </li> --}}
                             <li class="header__menu--items">
-                                <a class="header__menu--link {{ Request::segment(1) == '' ? 'active' : '' }}" href="{{ route('dashboard') }}">Home</a>  
+                                <a @class(["header__menu--link", "active" => Route::is('home')]) href="{{ route('home') }}">Home</a>  
                             </li>
                             <li class="header__menu--items">
-                                <a class="header__menu--link {{ Request::segment(1) == 'products' ? 'active' : '' }}" href="{{ route('products.index') }}">Products</a>  
+                                <a @class(["header__menu--link", "active" => Route::is('products')]) href="{{ route('products.index') }}">Products</a>  
                             </li>
                             <li class="header__menu--items">
                                 <a class="header__menu--link" href="#">Accesories </a>  
                             </li>
                             <li class="header__menu--items">
                                 <a class="header__menu--link" href="{{ route('inquiries.create') }}">Inquiry </a>  
+                            </li>
+                            <li class="header__menu--items">
+                                <a class="header__menu--link" href="{{ route('services.index') }}">Services </a>  
                             </li>
                             @if(!Auth::user())
                                 <li class="header__menu--items">
@@ -118,7 +107,7 @@
                     <ul class="header__account--wrapper d-flex align-items-center">
                         <li class="header__account--items d-none d-lg-block">
                             @if(Auth::user())
-                                <a class="header__account--btn" href="{{ route('profile.index') }}">
+                                <a class="header__account--btn" href="{{ route('dashboard.index') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                     <span class="visually-hidden">My account</span>
                                 </a>
@@ -168,7 +157,7 @@
                         </li>
                         <li class="header__account--items d-none d-lg-block">
                             @if(Auth::user())
-                                <a class="header__account--btn" href="{{ route('profile.index') }}">
+                                <a class="header__account--btn" href="{{ route('dashboard.index') }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                     <span class="visually-hidden">My account</span> 
                                 </a>
@@ -511,19 +500,21 @@
                         <nav class="header__menu--navigation">
                             <ul class="header__menu--wrapper d-flex">
                                 <li class="header__menu--items" >
-                                    <a class="header__menu--link text-white {{ Request::segment(1) == '' ? 'active' : '' }}" href="{{ route('dashboard') }}">Home </a>
+                                    <a class="header__menu--link text-white {{ Request::segment(1) == '' ? 'active' : '' }}" href="{{ route('home') }}">Home </a>
                                 </li>
                                 <li class="header__menu--items">
                                     <a  class="header__menu--link text-white {{ Request::segment(1) == 'products' ? 'active' : '' }}" href="{{ route('products.index') }}">Products </a>  
                                 </li>
                             
                                 <li class="header__menu--items">
-                                    <a class="header__menu--link text-white" href="{{route('products.index') }}">Accesories </a>  
+                                    <a class="header__menu--link text-white" href="#">Accesories </a>  
                                 </li>
                                 <li class="header__menu--items">
                                     <a class="header__menu--link text-white" href="{{ route('inquiries.create') }}">Inquiry </a>  
                                 </li>
-                               
+                                <li class="header__menu--items">
+                                    <a class="header__menu--link text-white" href="{{ route('services.index') }}">Services </a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
@@ -547,7 +538,7 @@
     <div class="offcanvas__header">
         <div class="offcanvas__inner">
             <div class="offcanvas__logo">
-                <a class="offcanvas__logo_link" href="{{route('dashboard')}}">
+                <a class="offcanvas__logo_link" href="{{route('home')}}">
                     <img src="{{ asset('assets/images/logo/nav-log.webp') }}" alt="Grocee Logo" width="158" height="36">
                 </a>
                 <button class="offcanvas__close--btn" data-offcanvas>close</button>
@@ -555,19 +546,20 @@
             <nav class="offcanvas__menu">
                 <ul class="offcanvas__menu_ul">
                     <li class="offcanvas__menu_li">
-                        <a class="offcanvas__menu_item" href="{{route('dashboard')}}">Home</a>
+                        <a class="offcanvas__menu_item" href="{{route('home')}}">Home</a>
                         <ul class="offcanvas__sub_menu">
-                            <li class="offcanvas__sub_menu_li"><a href="{{route('dashboard')}}" class="offcanvas__sub_menu_item">Home One</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="{{route('dashboard')}}" class="offcanvas__sub_menu_item">Home Two</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="{{route('dashboard')}}" class="offcanvas__sub_menu_item">Home Three</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="{{route('dashboard')}}" class="offcanvas__sub_menu_item">Home Four</a></li>
-                            <li class="offcanvas__sub_menu_li"><a href="{{route('dashboard')}}" class="offcanvas__sub_menu_item">Home Five</a></li>
+                            <li class="offcanvas__sub_menu_li"><a href="{{route('home')}}" class="offcanvas__sub_menu_item">Home One</a></li>
+                            <li class="offcanvas__sub_menu_li"><a href="{{route('home')}}" class="offcanvas__sub_menu_item">Home Two</a></li>
+                            <li class="offcanvas__sub_menu_li"><a href="{{route('home')}}" class="offcanvas__sub_menu_item">Home Three</a></li>
+                            <li class="offcanvas__sub_menu_li"><a href="{{route('home')}}" class="offcanvas__sub_menu_item">Home Four</a></li>
+                            <li class="offcanvas__sub_menu_li"><a href="{{route('home')}}" class="offcanvas__sub_menu_item">Home Five</a></li>
                         </ul>
                     </li>
 
                     <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('products.index') }}">Products</a></li>
                     <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="#">Accesories</a></li>
                     <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('inquiries.create') }}">Inquiry</a></li>
+                    <li class="offcanvas__menu_li"><a class="offcanvas__menu_item" href="{{ route('services.index') }}">Services </a></li>
                 </ul>
                 <div class="offcanvas__account--items">
                     <a class="offcanvas__account--items__btn d-flex align-items-center" href="{{ route('login') }}">
@@ -769,6 +761,5 @@
         </button>
     </div>
     <!-- End serch box area -->
-    
 </header>
 <!-- End header area -->

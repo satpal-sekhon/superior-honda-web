@@ -1,102 +1,40 @@
-@extends('layouts.app')
+@extends('layouts.my-account')
 
-@section('content')
-<main class="main__content_wrapper">
-
-    <!-- Start breadcrumb section -->
-    <section class="breadcrumb__section breadcrumb__bg">
-        <div class="container">
-            <div class="row row-cols-1">
-                <div class="col">
-                    <div class="breadcrumb__content text-center">
-                        <ul class="breadcrumb__content--menu d-flex justify-content-center">
-                            <li class="breadcrumb__content--menu__items"><a href="/">Home</a></li>
-                            <li class="breadcrumb__content--menu__items"><span>My Account</span></li>
-                        </ul>
-                    </div>
-                </div>
+@section('my-account')
+    <div class="account__content">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
             </div>
-        </div>
-    </section>
-    <!-- End breadcrumb section -->
-    
-    <!-- my account section start -->
-    <section class="my__account--section section--padding">
-        <div class="container">
-            <div class="my__account--section__inner border-radius-10 d-flex">
-                <div class="account__left--sidebar">
-                    <h2 class="account__content--title h3 mb-20">My Profile</h2>
-                    <ul class="account__menu">
-                        <li class="account__menu--list active"><a href="{{ route('profile.index')}}">Dashboard</a></li>
-                        <li class="account__menu--list"><a href="{{ route('profile.address')}}">Addresses</a></li>
-                        <li class="account__menu--list"><a href="{{ route('wishlists.index')}}">Wishlist</a></li>
-                        <li class="account__menu--list"><a href="{{ route('logout') }}">Log Out</a></li>
-                    </ul>
-                </div>
-                <div class="account__wrapper">
-                    <div class="account__content">
-                        <h2 class="account__content--title h3 mb-20">Addresses</h2>
-                        <button class="new__address--btn primary__btn mb-25" type="button">Add a new address</button>
-                        <div class="account__details two">
-                            <h3 class="account__details--title h4">Default</h3>
-                            <p class="account__details--desc">Admin <br> Dhaka <br> Dhaka 12119 <br> Bangladesh</p>
-                            <a class="account__details--link" href="#">View Addresses (1)</a>
-                        </div>
+        @endif
+        <h2 class="account__content--title h3 mb-20">Addresses</h2>
+        <a href="{{ route('addresses.create') }}" class="new__address--btn primary__btn mb-25">Add a new address</a>
+        @isset($addresses)
+            <div class="row">
+                @foreach ($addresses as $address)
+                @if ($address->is_default == 1)
+                <h3 class="account__details--title h4">Default</h3>
+            @endif
+                    <div class="col-md-4">
+
+                        <p class="account__details--desc">
+                            {{ $address->full_name }} <br>
+                            {{ $address->address }} <br>
+                            {{ $address->city }} {{ $address->postal_code }} <br>
+                            {{ $address->state->name }}, {{ $address->country->name }}
+                        </p>
+
                         <div class="account__details--footer d-flex">
-                            <button class="account__details--footer__btn" type="button">Edit</button>
-                            <button class="account__details--footer__btn" type="button">Delete</button>
+                            <a class="account__details--footer__btn"
+                                href="{{ route('addresses.edit', ['address' => $address->id]) }}">Edit</a>
+                            <button class="account__details--footer__btn delete-btn" data-source="address"
+                                data-endpoint="{{ route('addresses.destroy', $address->id) }}">Delete</button>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-        </div>
-    </section>
-    <!-- my account section end -->
-
-    <!-- Start shipping section -->
-    <section class="shipping__section">
-        <div class="container">
-            <div class="shipping__inner style2 d-flex">
-                <div class="shipping__items style2 d-flex align-items-center">
-                    <div class="shipping__icon">  
-                        <img src="assets/img/other/shipping1.webp" alt="icon-img">
-                    </div>
-                    <div class="shipping__content">
-                        <h2 class="shipping__content--title h3">Free Shipping</h2>
-                        <p class="shipping__content--desc">Free shipping over $100</p>
-                    </div>
-                </div>
-                <div class="shipping__items style2 d-flex align-items-center">
-                    <div class="shipping__icon">  
-                        <img src="assets/img/other/shipping2.webp" alt="icon-img">
-                    </div>
-                    <div class="shipping__content">
-                        <h2 class="shipping__content--title h3">Support 24/7</h2>
-                        <p class="shipping__content--desc">Contact us 24 hours a day</p>
-                    </div>
-                </div>
-                <div class="shipping__items style2 d-flex align-items-center">
-                    <div class="shipping__icon">  
-                        <img src="assets/img/other/shipping3.webp" alt="icon-img">
-                    </div>
-                    <div class="shipping__content">
-                        <h2 class="shipping__content--title h3">100% Money Back</h2>
-                        <p class="shipping__content--desc">You have 30 days to Return</p>
-                    </div>
-                </div>
-                <div class="shipping__items style2 d-flex align-items-center">
-                    <div class="shipping__icon">  
-                        <img src="assets/img/other/shipping4.webp" alt="icon-img">
-                    </div>
-                    <div class="shipping__content">
-                        <h2 class="shipping__content--title h3">Payment Secure</h2>
-                        <p class="shipping__content--desc">We ensure secure payment</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End shipping section -->
-
-</main>
+        @else
+            <h4>No address available</h4>
+        @endisset
+    </div>
 @endsection

@@ -19,7 +19,9 @@
 
         <!-- Custom Style CSS -->
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/sweetalert.css') }}">
 
+        @yield('head')
     </head>
 
     <body>
@@ -44,6 +46,50 @@
 
         <!-- Customscript js -->
         <script src="{{ asset('assets/js/script.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/js/jquery.validate.min.js') }}"></script>
+        <script src="{{ asset('assets/js/sweetalert.min.js') }}"></script>
+
+        @yield('script')
+        <script>
+            $(function() {            
+                $('.delete-btn').click(function() {
+                    let source = $(this).data('source');
+                    let deleteApiEndpoint = $(this).data('endpoint');
+                    swal({
+                        title: "Are you sure?",
+                        text: `You really want to remove this ${source}?`,
+                        type: "warning",
+                        showCancelButton: true,
+                        closeOnConfirm: false,
+                    }, function(isConfirm) {
+                        if (isConfirm) {
+                            $.ajax({
+                                url: deleteApiEndpoint,
+                                method: 'DELETE',
+                                data: {
+                                    '_token': '{{ csrf_token() }}'
+                                },
+                                success: function(response) {
+                                    if(response.success){
+                                        swal({
+                                            title: "Success!",
+                                            text: response.message,
+                                            type: "success",
+                                            showConfirmButton: false
+                                        }) 
+    
+                                        setTimeout(() => {
+                                            location.reload();
+                                        }, 2000);
+                                    }
+                                }
+                            })
+                        }
+                    });
+                })
+            })
+        </script>
 
     </body>
 </html>
