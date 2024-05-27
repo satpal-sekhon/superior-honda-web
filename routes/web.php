@@ -15,15 +15,20 @@ Route::get('/', function (){
     return view('home');
 })->name('home');
 
+Route::middleware(['auth', 'auth.session'])->group(function () {
+    Route::resources([
+        'wishlists' => WishlistController::class,
+        'dashboard' => DashboardController::class,
+        'profile'   => ProfileController::class,
+        'addresses' => AddressController::class,
+        'vehicles'  => VehicleController::class,
+    ]);
+});
+
 Route::resources([
     'products'  => ProductController::class,
-    'wishlists' => WishlistController::class,
-    'dashboard' => DashboardController::class,
-    'profile'   => ProfileController::class,
-    'inquiries' => InquiryController::class,
     'services'  => ServiceController::class,
-    'addresses' => AddressController::class,
-    'vehicles'  => VehicleController::class,
+    'inquiries' => InquiryController::class,
 ]);
 
 Route::get('/states/{country_id?}', [AddressController::class, 'getStates'])->name('addresses.getStates');
