@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/sweetalert.css') }}">
 
+        @yield('head')
     </head>
 
     <body>

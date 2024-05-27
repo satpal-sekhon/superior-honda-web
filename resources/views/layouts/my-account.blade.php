@@ -25,11 +25,11 @@
         <div class="container">
             <div class="my__account--section__inner border-radius-10 d-flex">
                 <div class="account__left--sidebar">
-                    <h2 class="account__content--title h3 mb-20">My Profile</h2>
                     <ul class="account__menu">
-                        <li class="account__menu--list"><a href="{{ route('profile.index')}}">Dashboard</a></li>
-                        <li class="account__menu--list active"><a href="{{ route('addresses.index')}}">Addresses</a></li>
-                        <li class="account__menu--list"><a href="{{ route('vehicles.index')}}">Vehicles</a></li>
+                        <li @class(["account__menu--list", "active" => Request::is('dashboard')])><a href="{{ route('dashboard.index')}}">Dashboard</a></li>
+                        <li @class(["account__menu--list", "active" => Request::is('profile')])><a href="{{ route('profile.index')}}">My Profile</a></li>
+                        <li @class(["account__menu--list", "active" => Request::is('addresses')]) }}"><a href="{{ route('addresses.index')}}">Addresses</a></li>
+                        <li @class(["account__menu--list", "active" => Request::is('vehicles')])><a href="{{ route('vehicles.index')}}">Vehicles</a></li>
                         <li class="account__menu--list"><a href="{{ route('wishlists.index')}}">Wishlist</a></li>
                         <li class="account__menu--list"><a href="{{ route('logout') }}">Log Out</a></li>
                     </ul>

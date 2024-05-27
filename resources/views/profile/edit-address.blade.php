@@ -9,31 +9,31 @@
             <div class="row">
                 <div class="col-md-6 mb-2">
                     <label>Full Name</label>
-                    <input type="text" name="full_name" class="form-control" value="{{ $address->full_name }}">
+                    <input type="text" name="full_name" class="account__login--input" value="{{ $address->full_name }}">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Mobile Number</label>
-                    <input type="number" name="mobile_no" class="form-control" value="{{ $address->mobile_number }}">
+                    <input type="number" name="mobile_no" class="account__login--input" value="{{ $address->mobile_number }}">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Address (House No., Building Name)</label>
-                    <input type="text" name="address" class="form-control" value="{{ $address->address }}">
+                    <input type="text" name="address" class="account__login--input" value="{{ $address->address }}">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>City</label>
-                    <input type="text" name="city" class="form-control" value="{{ $address->city }}">
+                    <input type="text" name="city" class="account__login--input" value="{{ $address->city }}">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Nearby Famous Shop/Mall/Landmark</label>
-                    <input type="text" name="nearby" class="form-control" value="{{ $address->nearby }}">
+                    <input type="text" name="nearby" class="account__login--input" value="{{ $address->nearby }}">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Postal Code</label>
-                    <input type="number" name="postal_code" class="form-control" value="{{ $address->postal_code }}">
+                    <input type="number" name="postal_code" class="account__login--input" value="{{ $address->postal_code }}">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Country</label>
-                    <select id="country" name="country_id" class="form-control">
+                    <select id="country" name="country_id" class="account__login--input">
                         <option>Select Country</option>
                         @foreach ($countries as $country)
                             <option value="{{ $country->id }}" @selected($address->country_id == $country->id)> {{ $country->name }} </option>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>State</label>
-                    <select id="state" name="state_id" class="form-control">
+                    <select id="state" name="state_id" class="account__login--input">
                         <option>Select State</option>
                         @foreach ($states as $state)
                             <option value="{{ $state->id }}" @selected($address->state_id == $state->id)>{{ $state->name }}</option>    

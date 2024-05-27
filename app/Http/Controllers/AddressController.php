@@ -37,8 +37,8 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        
-        if ($request->is_default) {
+        $savedAddress = Address::where('user_id',Auth::id())->get()->count();
+        if ($request->is_default || $savedAddress <= 0) {
             $is_default = 1;
             Address::where('user_id', Auth::id())->update([
                 'is_default' => 0

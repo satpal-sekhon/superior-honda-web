@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -11,7 +12,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('profile.index');
+        return view('profile.my-profile');
     }
 
     public function address()
@@ -56,7 +57,16 @@ class ProfileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        User::where('id', $id)->update([
+            'first_name'   => $request->first_name,
+            'last_name'   => $request->last_name,
+            'date_of_birth'     => $request->date_of_birth,
+            'phone_digicel'       => $request->phone_digicel,
+            'phone_lime'        => $request->phone_lime,
+            'lic_no' => $request->lic_no,
+            'address'      => $request->address
+        ]);
+        return redirect()->route('profile.index')->with('success', 'Profile Updated successfully.');
     }
 
     /**

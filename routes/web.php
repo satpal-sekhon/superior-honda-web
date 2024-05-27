@@ -3,6 +3,7 @@
 Use App\Http\Controllers\ProductController;
 Use App\Http\Controllers\AuthController;
 Use App\Http\Controllers\WishlistController;
+Use App\Http\Controllers\DashboardController;
 Use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\AddressController;
@@ -11,12 +12,13 @@ use App\Http\Controllers\VehicleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (){
-    return view('dashboard');
-})->name('dashboard');
+    return view('home');
+})->name('home');
 
 Route::resources([
     'products'  => ProductController::class,
     'wishlists' => WishlistController::class,
+    'dashboard' => DashboardController::class,
     'profile'   => ProfileController::class,
     'inquiries' => InquiryController::class,
     'services'  => ServiceController::class,

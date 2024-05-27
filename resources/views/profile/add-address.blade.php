@@ -8,31 +8,31 @@
             <div class="row">
                 <div class="col-md-6 mb-2">
                     <label>Full Name</label>
-                    <input type="text" name="full_name" class="form-control">
+                    <input type="text" name="full_name" class="account__login--input">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Mobile Number</label>
-                    <input type="number" name="mobile_no" class="form-control">
+                    <input type="number" name="mobile_no" class="account__login--input">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Address (House No., Building Name)</label>
-                    <input type="text" name="address" class="form-control">
+                    <input type="text" name="address" class="account__login--input">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>City</label>
-                    <input type="text" name="city" class="form-control">
+                    <input type="text" name="city" class="account__login--input">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Nearby Famous Shop/Mall/Landmark</label>
-                    <input type="text" name="nearby" class="form-control">
+                    <input type="text" name="nearby" class="account__login--input">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Postal Code</label>
-                    <input type="number" name="postal_code" class="form-control">
+                    <input type="number" name="postal_code" class="account__login--input">
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>Country</label>
-                    <select id="country" name="country_id" class="form-control">
+                    <select id="country" name="country_id" class="account__login--input">
                         <option>Select Country</option>
                         @foreach ($countries as $country)
                             <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -41,12 +41,12 @@
                 </div>
                 <div class="col-md-6 mb-2">
                     <label>State</label>
-                    <select id="state" name="state_id" class="form-control">
+                    <select id="state" name="state_id" class="account__login--input">
                         <option>Select State</option>
                     </select>
                 </div>
                 <div class="col-md-6 mt-2">
-                    <input type="checkbox" name="is_default"  @checked(old(0, !$savedAddress)) @disabled(!$savedAddress)> Use address as default
+                    <input type="checkbox" name="is_default" @checked(old(0, !$savedAddress)) @disabled(!$savedAddress)> Use address as default
                 </div>
             </div>
             <br />
