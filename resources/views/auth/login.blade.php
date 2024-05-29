@@ -35,10 +35,10 @@
                                     </div>
                                 @endif
                                 <div class="account__login--inner">
-                                    <form method="POST" action="{{ route('authenticate') }}" class="md-float-material form-material">
+                                    <form method="post" action="{{ route('authenticate') }}" name="login" class="md-float-material form-material">
                                         @csrf
                                         <label>
-                                            <input class="account__login--input" name="email" placeholder="Email Addres" type="email">
+                                            <input class="account__login--input" name="email_or_phone" placeholder="Email / Phone Number" type="text">
                                         </label>
                                         <label>
                                             <input class="account__login--input" name="password" placeholder="Password" type="password">
@@ -50,18 +50,10 @@
                                                 <label class="checkout__checkbox--label login__remember--label" for="check1">
                                                     Remember me</label>
                                             </div>
-                                            <button class="account__login--forgot"  type="submit">Forgot Your Password?</button>
+                                            <button class="account__login--forgot"  type="button">Forgot Your Password?</button>
                                         </div>
                                         <button class="account__login--btn primary__btn" type="submit">Login</button>
                                     </form>
-                                    {{-- <div class="account__login--divide">
-                                        <span class="account__login--divide__text">OR</span>
-                                    </div>
-                                    <div class="account__social d-flex justify-content-center mb-15">
-                                        <a class="account__social--link facebook" target="_blank" href="https://www.facebook.com/">Facebook</a>
-                                        <a class="account__social--link google" target="_blank" href="https://www.google.com/">Google</a>
-                                        <a class="account__social--link twitter" target="_blank" href="https://twitter.com/">Twitter</a>
-                                    </div> --}}
                                     <br/>
                                     <p class="account__login--signup__text">Don,t Have an Account? <button type="submit">Sign up now</button></p>
                                 </div>
@@ -69,22 +61,41 @@
                         </div>
                         <div class="col">
                             <div class="account__login register">
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                                 <div class="account__login--header mb-25">
                                     <h2 class="account__login--header__title mb-10">Create an Account</h2>
                                     <p class="account__login--header__desc">Register here if you are a new customer</p>
                                 </div>
                                 <div class="account__login--inner">
+                                <form method="post" action="{{ route('register') }}" class="md-float-material form-material" name="register">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-6 mb-2">
+                                            <label>
+                                                <input class="account__login--input" placeholder="First Name" type="text" name="first_name">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label>
+                                                <input class="account__login--input" placeholder="Last Name" type="text" name="last_name">
+                                            </label>
+                                        </div>
+                                    </div>
                                     <label>
-                                        <input class="account__login--input" placeholder="Username" type="text">
+                                        <input class="account__login--input" placeholder="Email Addres" type="email" name="email">
                                     </label>
                                     <label>
-                                        <input class="account__login--input" placeholder="Email Addres" type="email">
+                                        <input class="account__login--input" placeholder="Phone Number" type="number" name="phone_number">
                                     </label>
                                     <label>
-                                        <input class="account__login--input" placeholder="Password" type="password">
+                                        <input class="account__login--input" placeholder="Password" type="password" name="password" id="password">
                                     </label>
                                     <label>
-                                        <input class="account__login--input" placeholder="Confirm Password" type="password">
+                                        <input class="account__login--input" placeholder="Confirm Password" type="password"  name="confirm_password">
                                     </label>
                                     <button class="account__login--btn primary__btn mb-10" type="submit">Submit & Register</button>
                                     <div class="account__login--remember position__relative">
@@ -93,6 +104,7 @@
                                         <label class="checkout__checkbox--label login__remember--label" for="check2">
                                             I have read and agree to the terms & conditions</label>
                                     </div>
+                                </form>
                                 </div>
                             </div>
                         </div>
@@ -147,3 +159,62 @@
     </section>
     <!-- End shipping section -->
 @endsection
+
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script>
+        $(function() {
+            $('[name="register"]').validate({
+                rules: {
+                    first_name: "required",
+                    phone_number: "required",
+                    password: "required",
+                    confirm_password: {
+                        equalTo: "#password"
+                    }
+                },
+                messages: {
+                    first_name: "Please enter first name",
+                    phone_number: "Please enter phone_number",
+                    password: "Please enter password",
+                    confirm_password: {
+                        required: 'Please enter confirm password.',
+                        equalTo: 'Confirm Password do not match with password.',
+                    }
+                },
+                errorClass: "text-danger f-12",
+                errorElement: "span",
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-invalid");
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass("is-invalid");
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        
+            $('[name="login"]').validate({
+                rules: {
+                    email_or_phone: "required",
+                    password: "required",
+                },
+                messages: {
+                    email_or_phone: "Please enter your email or phone number.",
+                    password: "Please enter your password.",
+                },
+                errorClass: "text-danger f-12",
+                errorElement: "span",
+                highlight: function(element, errorClass, validClass) {
+                    $(element).addClass("is-invalid");
+                },
+                unhighlight: function(element, errorClass, validClass) {
+                    $(element).removeClass("is-invalid");
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+ 

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -18,10 +21,14 @@ class AuthController extends Controller
 
     public function authenticate(Request $request): RedirectResponse
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $loginType = $request->validate([
+            'email_or_phone' => 'required',
+            'password' => 'required',
         ]);
+
+        $field = filter_var($request->input('email_or_phone'), FILTER_VALIDATE_EMAIL) ? 'email' : 'phone_number';
+        $credentials[$field] = $request->input('email_or_phone');
+        $credentials['password'] = $request->input('password');
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -85,5 +92,20 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('login');
+    }
+    public function register(Request $request)
+    {
+        $request->validate([
+            'first_name' => 'required',
+        ]);
+        User::create([
+            'first_name' => $request->first_name,
+            'last_name'  => $request->last_name,
+            'email'      => $request->email,
+            'phone_number' => $request->phone_number,
+            'password'    => Hash::make('password')
+        ])->assignRole('Customer');
+
+        return redirect('/login')->with('success', 'Registration successful! Please login.');
     }
 }

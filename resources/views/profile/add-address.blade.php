@@ -92,8 +92,8 @@
                     $(element).removeClass("is-invalid");
                 },
                 submitHandler: function(form) {
-                    //console.log('form',form)
-                    form.submit();
+                    console.log('form',form)
+                    // form.submit();
                 }
             });
         });
