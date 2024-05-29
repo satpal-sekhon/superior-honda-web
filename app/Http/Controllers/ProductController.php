@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\VehicleBrand;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,9 +14,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->get();
-
-        return view('products.index', compact('products'));
+        $products = Product::with('productImages')->latest()->get();
+        $productCategories = ProductCategory::latest()->limit(8)->get();
+        $brands = VehicleBrand::latest()->limit(8)->get();
+        foreach($productCategories as $key=>$product)
+        {
+            $productCategories[$key]['items'] = Product::where('category_id', $product->id)->count();
+        }
+        return view('products.index', compact('products', 'productCategories','brands'));
     }
 
     /**
