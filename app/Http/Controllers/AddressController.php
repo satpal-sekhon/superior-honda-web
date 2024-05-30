@@ -25,7 +25,6 @@ class AddressController extends Controller
      */
     public function create()
     {
-
         $countries = Country::all();
         $savedAddress = Address::where('user_id',Auth::id())->get()->count();
 

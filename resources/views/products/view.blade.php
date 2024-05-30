@@ -26,18 +26,21 @@
                     <div class="product__details--media">
                         <div class="single__product--preview  swiper mb-25">
                             <div class="swiper-wrapper">
+                                @php
+                                    $images = $product->productImages->first();
+                                @endphp
                                 <div class="swiper-slide">
                                     <div class="product__media--preview__items">
-                                        <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="{{ asset('assets/images/product/big-product/product2.webp') }}"><img class="product__media--preview__items--img" src="{{ asset('assets/images/product/big-product/product2.webp') }}" alt="product-media-img"></a>
+                                        <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="{{ env('BASE_IMAGE_PATH') . '/' . $images->images }}"><img class="product__media--preview__items--img" src="{{ env('BASE_IMAGE_PATH') . '/' . $images->images }}" alt="product-media-img"></a>
                                         <div class="product__media--view__icon">
-                                            <a class="product__media--view__icon--link glightbox" href="{{ asset('assets/images/product/big-product/product2.webp') }}" data-gallery="product-media-zoom">
+                                            <a class="product__media--view__icon--link glightbox" href="{{ env('BASE_IMAGE_PATH') . '/' . $images->images }}" data-gallery="product-media-zoom">
                                                 <svg class="product__items--action__btn--svg" xmlns="http://www.w3.org/2000/svg" width="22.51" height="22.443" viewBox="0 0 512 512"><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"></path><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"></path></svg>
                                                 <span class="visually-hidden">product view</span> 
                                             </a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="swiper-slide">
+                                {{-- <div class="swiper-slide">
                                     <div class="product__media--preview__items">
                                         <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="{{ asset('assets/images/product/big-product/product6.webp') }}"><img class="product__media--preview__items--img" src="{{ asset('assets/images/product/big-product/product6.webp') }}" alt="product-media-img"></a>
                                         <div class="product__media--view__icon">
@@ -47,8 +50,8 @@
                                             </a>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="swiper-slide">
+                                </div> --}}
+                                {{-- <div class="swiper-slide">
                                     <div class="product__media--preview__items">
                                         <a class="product__media--preview__items--link glightbox" data-gallery="product-media-preview" href="{{ asset('assets/images/product/big-product/product3.webp') }}"><img class="product__media--preview__items--img" src="{{ asset('assets/images/product/big-product/product3.webp') }}" alt="product-media-img"></a>
                                         <div class="product__media--view__icon">
@@ -80,17 +83,19 @@
                                             </a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="single__product--nav swiper">
                             <div class="swiper-wrapper">
+                                @foreach($product->productImages as $images)
                                 <div class="swiper-slide">
                                     <div class="product__media--nav__items">
-                                        <img class="product__media--nav__items--img" src="{{ asset('assets/images/product/small-product/product1.webp') }}" alt="product-nav-img">
+                                        <img class="product__media--nav__items--img" src="{{ env('BASE_IMAGE_PATH') . '/' . $images->images }}" alt="product-nav-img">
                                     </div>
                                 </div>
-                                <div class="swiper-slide">
+                                @endforeach
+                                {{-- <div class="swiper-slide">
                                     <div class="product__media--nav__items">
                                         <img class="product__media--nav__items--img" src="{{ asset('assets/images/product/small-product/product2.webp') }}" alt="product-nav-img">
                                     </div>
@@ -109,7 +114,7 @@
                                     <div class="product__media--nav__items">
                                         <img class="product__media--nav__items--img" src="{{ asset('assets/images/product/small-product/product5.webp') }}" alt="product-nav-img">
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="swiper__nav--btn swiper-button-next">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class=" -chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
@@ -123,11 +128,10 @@
                 <div class="col">
                     <div class="product__details--info">
                         <form action="#">
-                            <h2 class="product__details--info__title mb-15">Amazon Cloud Cam Security
-                                Camera</h2>
+                            <h2 class="product__details--info__title mb-15">{{ $product->product_name }}</h2>
                             <div class="product__details--info__price mb-12">
-                                <span class="current__price">$58.00</span>
-                                <span class="old__price">$68.00</span>
+                                <span class="current__price">${{ number_format($product->cost_price, 2) }}</span>
+                                <span class="old__price">${{ number_format($product->cost_price, 2) }}</span>
                             </div>
                             <ul class="rating product__card--rating mb-15 d-flex">
                                 <li class="rating__list">
@@ -169,50 +173,8 @@
                                     <span class="rating__review--text">(126) Review</span>
                                 </li>
                             </ul>
-                            <p class="product__details--info__desc mb-15">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut numquam ullam is recusandae laborum explicabo id sequi quisquam, ab sunt deleniti quidem ea animi facilis quod nostrum odit! Repellendus voluptas suscipit cum harum.</p>
+                            <p class="product__details--info__desc mb-15">{{ $product->description }}</p>
                             <div class="product__variant">
-                                <div class="product__variant--list mb-10">
-                                    <fieldset class="variant__input--fieldset">
-                                        <legend class="product__variant--title mb-8">Color :</legend>
-                                        <div class="variant__color d-flex">
-                                            <div class="variant__color--list">
-                                                <input id="color-red5" name="color" type="radio" checked>
-                                                <label class="variant__color--value red" for="color-red5" title="Red"><img class="variant__color--value__img" src="{{ asset('assets/images/product/small-product/product1.webp') }}" alt="variant-color-img"></label>
-                                            </div>
-                                            <div class="variant__color--list">
-                                                <input id="color-red6" name="color" type="radio">
-                                                <label class="variant__color--value red" for="color-red6" title="Black"><img class="variant__color--value__img" src="{{ asset('assets/images/product/small-product/product2.webp') }}" alt="variant-color-img"></label>
-                                            </div>
-                                            <div class="variant__color--list">
-                                                <input id="color-red7" name="color" type="radio">
-                                                <label class="variant__color--value red" for="color-red7" title="Pink"><img class="variant__color--value__img" src="{{ asset('assets/images/product/small-product/product3.webp') }}" alt="variant-color-img"></label>
-                                            </div>
-                                            <div class="variant__color--list">
-                                                <input id="color-red8" name="color" type="radio">
-                                                <label class="variant__color--value red" for="color-red8" title="Orange"><img class="variant__color--value__img" src="{{ asset('assets/images/product/small-product/product4.webp') }}" alt="variant-color-img"></label>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                </div>
-                                <div class="product__variant--list mb-20">
-                                    <fieldset class="variant__input--fieldset">
-                                        <legend class="product__variant--title mb-8">Weight :</legend>
-                                        <ul class="variant__size d-flex">
-                                            <li class="variant__size--list">
-                                                <input id="weight4" name="weight" type="radio" checked>
-                                                <label class="variant__size--value red" for="weight4">5 kg</label>
-                                            </li>
-                                            <li class="variant__size--list">
-                                                <input id="weight5" name="weight" type="radio">
-                                                <label class="variant__size--value red" for="weight5">3 kg</label>
-                                            </li>
-                                            <li class="variant__size--list">
-                                                <input id="weight6" name="weight" type="radio">
-                                                <label class="variant__size--value red" for="weight6">2 kg</label>
-                                            </li>
-                                        </ul>
-                                    </fieldset>
-                                </div>
                                 <div class="product__variant--list quantity d-flex align-items-center mb-20">
                                     <div class="quantity__box">
                                         <button type="button" class="quantity__value quickview__value--quantity decrease" aria-label="quantity value" value="Decrease Value">-</button>
@@ -232,14 +194,14 @@
                                 </div>
                                 <div class="product__variant--list mb-15">
                                     <div class="product__details--info__meta">
-                                        <p class="product__details--info__meta--list"><strong>Barcode:</strong>  <span> 565461</span> </p>
-                                        <p class="product__details--info__meta--list"><strong>Sky:</strong>  <span>4420</span> </p>
+                                        <p class="product__details--info__meta--list"><strong>Barcode:</strong>  <span> {{ $product->product_code }}</span> </p>
+                                        {{-- <p class="product__details--info__meta--list"><strong>Sky:</strong>  <span>4420</span> </p>
                                         <p class="product__details--info__meta--list"><strong>Vendor:</strong>  <span>Belo</span> </p>
-                                        <p class="product__details--info__meta--list"><strong>Type:</strong>  <span>Auto Parts</span> </p>
+                                        <p class="product__details--info__meta--list"><strong>Type:</strong>  <span>Auto Parts</span> </p> --}}
                                     </div>
                                 </div>
                             </div>
-                            <div class="quickview__social d-flex align-items-center mb-15">
+                            {{-- <div class="quickview__social d-flex align-items-center mb-15">
                                 <label class="quickview__social--title">Social Share:</label>
                                 <ul class="quickview__social--wrapper mt-0 d-flex">
                                     <li class="quickview__social--list">
@@ -275,7 +237,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> --}}
                             <div class="guarantee__safe--checkout">
                                 <h5 class="guarantee__safe--checkout__title">Guaranteed Safe Checkout</h5>
                                 <img class="guarantee__safe--checkout__img" src="{{ asset('assets/images/other/safe-checkout.webp') }}" alt="Payment Image">

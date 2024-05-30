@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
+use App\Models\VehicleBrand;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -12,9 +15,15 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::latest()->get();
-
-        return view('products.index', compact('products'));
+        $products = Product::with('productImages')->latest()->paginate(9);
+        $productCategories = ProductCategory::with('products')->latest()->limit(8)->get();
+        $brands = VehicleBrand::latest()->limit(8)->get();
+        foreach($productCategories as $key=>$product)
+        {
+            $productCategories[$key]['items'] = Product::where('category_id', $product->id)->count();
+            $productCategories[$key]['productImages'] = ProductImage::where('product_id', $product->id)->first();
+        }
+        return view('products.index', compact('products', 'productCategories','brands'));
     }
 
     /**
@@ -38,7 +47,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        // return view('products.view', compact($product));
+        $product = Product::with('productImages')->where('id', $product->id)->first();
+
+        return view('products.view', compact('product'));
     }
 
     /**
@@ -63,5 +74,12 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function categoryProduct($id)
+    {
+        $products = Product::with('productImages')->where('category_id', $id)->latest()->paginate(9);
+
+        return view('products.category-product', compact('products'));
     }
 }
