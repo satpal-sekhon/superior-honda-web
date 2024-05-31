@@ -636,7 +636,8 @@
                      {{--===================== Pagination ===============--}}
                     <div class="pagination__area">
                         <nav class="pagination justify-content-center">
-                            <!-- Previous Page Link -->
+                            <!-- Previous Page Link -->  
+                        @if($products->total() > $products->perPage())    
                             @if ($products->onFirstPage())
                                 <li class="page-item disabled pagination__list" aria-disabled="true"
                                     aria-label="@lang('pagination.previous')">
@@ -704,6 +705,7 @@
                                     </span>
                                 </li>
                             @endif
+                        @endif    
                         </nav>
                     </div>
                      {{--===================== End Pagination ===============--}}
