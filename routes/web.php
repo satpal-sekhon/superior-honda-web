@@ -9,7 +9,7 @@ use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\VehicleController;
-use Illuminate\Support\Facades\Route; 
+use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
