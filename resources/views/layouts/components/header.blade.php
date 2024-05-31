@@ -41,7 +41,11 @@
   
   <!-- Start header area -->
   <header class="header__section">
-    
+    @php $total = 0 @endphp
+    @foreach((array) session('cart') as $id => $details)
+        @php 
+        $total += $details['price'] * $details['quantity'] @endphp
+    @endforeach
     <div class="main__header header__sticky">
         <div class="container">
             <div class="main__header--inner position__relative d-flex justify-content-between align-items-center">
@@ -141,8 +145,8 @@
                                       </g>
                                     </g>
                                 </svg>  
-                                <span class="items__count">2</span> 
-                                <span class="minicart__btn--text">My Cart <br> <span class="minicart__btn--text__price">$0.00</span></span>
+                                <span class="items__count">{{ count((array) session('cart')) }}</span> 
+                                <span class="minicart__btn--text">My Cart <br> <span class="minicart__btn--text__price">${{ number_format($total,2) }}</span></span>
                             </a>
                         </li>
                     </ul>
@@ -185,7 +189,7 @@
                                       </g>
                                     </g>
                                 </svg>
-                                <span class="items__count">2</span> 
+                                <span class="items__count">{{ count((array) session('cart')) }}</span> 
                             </a>
                         </li>
                     </ul>
@@ -676,62 +680,43 @@
             </div>
             <p class="minicart__header--desc">The organic foods products are limited</p>
         </div>
-        <div class="minicart__product">
-            <div class="minicart__product--items d-flex">
-                <div class="minicart__thumb">
-                    <a href="#"><img src="{{ asset('assets/images/product/small-product/product1.webp') }}" alt="prduct-img"></a>
-                </div>
-                <div class="minicart__text">
-                    <h4 class="minicart__subtitle"><a href="#">Car & Motorbike Care.</a></h4>
-                    <span class="color__variant"><b>Color:</b> Beige</span>
-                    <div class="minicart__price">
-                        <span class="minicart__current--price">$125.00</span>
-                        <span class="minicart__old--price">$140.00</span>
-                    </div>
-                    <div class="minicart__text--footer d-flex align-items-center">
-                        <div class="quantity__box minicart__quantity">
-                            <button type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</button>
-                            <label>
-                                <input type="number" class="quantity__number" value="1" data-counter />
-                            </label>
-                            <button type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</button>
+        @if(session('cart'))
+            @foreach((array) session('cart') as $id =>  $details)
+                <div class="minicart__product">
+                    <div class="minicart__product--items d-flex">
+                        <div class="minicart__thumb">
+                            <a href="#"><img src="{{ env('BASE_IMAGE_PATH') . '/' .$details['image'] }}" alt="prduct-img"></a>
                         </div>
-                        <button class="minicart__product--remove" type="button">Remove</button>
-                    </div>
-                </div>
-            </div>
-            <div class="minicart__product--items d-flex">
-                <div class="minicart__thumb">
-                    <a href="#"><img src="{{ asset('assets/images/product/small-product/product2.webp') }}" alt="prduct-img"></a>
-                </div>
-                <div class="minicart__text">
-                    <h4 class="minicart__subtitle"><a href="#">Engine And Drivetrain.</a></h4>
-                    <span class="color__variant"><b>Color:</b> Green</span>
-                    <div class="minicart__price">
-                        <span class="minicart__current--price">$115.00</span>
-                        <span class="minicart__old--price">$130.00</span>
-                    </div>
-                    <div class="minicart__text--footer d-flex align-items-center">
-                        <div class="quantity__box minicart__quantity">
-                            <button type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</button>
-                            <label>
-                                <input type="number" class="quantity__number" value="1" data-counter />
-                            </label>
-                            <button type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</button>
+                        <div class="minicart__text">
+                            <h4 class="minicart__subtitle"><a href="#">{{  $details['name'] }}</a></h4>
+                            {{-- <span class="color__variant"><b>Color:</b> Beige</span> --}}
+                            <div class="minicart__price">
+                                <span class="minicart__current--price">${{ number_format($details['price'], 2) }}</span>
+                                <span class="minicart__old--price">${{ number_format($details['price'],2 ) }}</span>
+                            </div>
+                            <div class="minicart__text--footer d-flex align-items-center">
+                                <div class="quantity__box minicart__quantity">
+                                    <button type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</button>
+                                    <label>
+                                        <input type="number" class="quantity__number" value="{{ $details['quantity'] }}" data-counter />
+                                    </label>
+                                    <button type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</button>
+                                </div>
+                                <button class="minicart__product--remove remove-from-cart" data-id="{{ $id }}" type="button">Remove</button>
+                            </div>
                         </div>
-                        <button class="minicart__product--remove" type="button">Remove</button>
                     </div>
                 </div>
-            </div>
-        </div>
+            @endforeach
+        @endif
         <div class="minicart__amount">
             <div class="minicart__amount_list d-flex justify-content-between">
                 <span>Sub Total:</span>
-                <span><b>$240.00</b></span>
+                <span><b>${{ number_format($total,2) }}</b></span>
             </div>
             <div class="minicart__amount_list d-flex justify-content-between">
                 <span>Total:</span>
-                <span><b>$240.00</b></span>
+                <span><b>${{ number_format($total,2) }}</b></span>
             </div>
         </div>
         <div class="minicart__conditions text-center">
@@ -763,3 +748,26 @@
     <!-- End serch box area -->
 </header>
 <!-- End header area -->
+<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+
+<script>
+$(".remove-from-cart").click(function (e) {
+        e.preventDefault();
+  
+        var ele = $(this);
+    
+        if(confirm("Are you sure want to remove?")) {
+            $.ajax({
+                url: '{{ route('remove-from-cart') }}',
+                method: "DELETE",
+                data: {
+                    _token: '{{ csrf_token() }}', 
+                    id: ele.parents("tr").attr("data-id")
+                },
+                success: function (response) {
+                    // window.location.reload();
+                }
+            });
+        }
+    });
+    </script>
