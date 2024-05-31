@@ -51,5 +51,5 @@ Route::post('get-vehicle-model-variant', [VehicleController::class, 'getVehicleM
 Route::get('add', [CartController::class, 'index'])->name('add');  
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
 Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
-Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
+Route::post('update-cart', [CartController::class, 'update'])->name('update-cart');
 Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove-from-cart'); 

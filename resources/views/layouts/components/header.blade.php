@@ -696,11 +696,11 @@
                             </div>
                             <div class="minicart__text--footer d-flex align-items-center">
                                 <div class="quantity__box minicart__quantity">
-                                    <button type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</button>
+                                    <button type="button" class="quantity__value decrease" data-id="{{ $id }}" aria-label="quantity value"  value="Decrease Value">-</button>
                                     <label>
-                                        <input type="number" class="quantity__number" value="{{ $details['quantity'] }}" data-counter />
+                                        <input type="number" class="quantity__number" min = '1' value="{{ $details['quantity'] }}" data-counter />
                                     </label>
-                                    <button type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</button>
+                                    <button type="button" class="quantity__value increase" data-id="{{ $id }}" aria-label="quantity value" value="Increase Value">+</button>
                                 </div>
                                 <button class="minicart__product--remove remove-from-cart" data-id="{{ $id }}" type="button">Remove</button>
                             </div>
@@ -752,22 +752,39 @@
 
 <script>
 $(".remove-from-cart").click(function (e) {
-        e.preventDefault();
-  
-        var ele = $(this);
-    
+    e.preventDefault();
+    var id = $(this).attr("data-id");
         if(confirm("Are you sure want to remove?")) {
             $.ajax({
                 url: '{{ route('remove-from-cart') }}',
                 method: "DELETE",
                 data: {
                     _token: '{{ csrf_token() }}', 
-                    id: ele.parents("tr").attr("data-id")
+                    id: id
                 },
                 success: function (response) {
-                    // window.location.reload();
+                    window.location.reload();
                 }
             });
         }
     });
+
+    $('.increase').click(function() {
+            var id = $(this).attr("data-id");
+            var quantityInput = $(this).parent().find('.quantity__number');
+            var currentValue = parseInt(quantityInput.val());
+            var qty = currentValue+1 ;
+            $.ajax({
+                url: '{{ route('update-cart') }}',
+                method: "post",
+                data: {
+                    _token: '{{ csrf_token() }}', 
+                    id: id,
+                    qty: qty
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        });
     </script>

@@ -26,16 +26,19 @@ class CartController extends Controller
      */
     public function addToCart(Request $request)
     {
-        echo"<pre>"; print_r($request->all()); die();
-        $product = Product::with('productImages')->findOrFail($request->id);
+        $request->validate([
+            'product_id'=> 'required',
+            'quantity'  => 'required',
+        ]);
+        $product = Product::with('productImages')->findOrFail($request->product_id);
         $image = $product->productImages->first();
           
         $cart = session()->get('cart', []);
   
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+        if(isset($cart[$request->product_id])) {
+            $cart[$request->product_id]['quantity']++;
         } else {
-            $cart[$id] = [
+            $cart[$request->product_id] = [
                 "name" => $product->product_name,
                 "quantity" => 1,
                 "price" => $product->cost_price,
@@ -77,9 +80,9 @@ class CartController extends Controller
      */
     public function update(Request $request)
     {
-        if($request->id && $request->quantity){
+        if($request->id && $request->qty){
             $cart = session()->get('cart');
-            $cart[$request->id]["quantity"] = $request->quantity;
+            $cart[$request->id]["quantity"] = $request->qty;
             session()->put('cart', $cart);
             session()->flash('success', 'Cart updated successfully');
         }
@@ -90,7 +93,6 @@ class CartController extends Controller
      */
     public function remove(Request $request)
     {
-        echo"<pre>"; print_R($request->all()); die();
         if($request->id) {
             $cart = session()->get('cart');
             if(isset($cart[$request->id])) {
