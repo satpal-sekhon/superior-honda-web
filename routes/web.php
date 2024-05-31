@@ -29,6 +29,10 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         'addresses' => AddressController::class,
         'vehicles'  => VehicleController::class,
     ]);
+
+    /************** Wishlist*****************/
+    Route::get('wishlist/{id}', [WishlistController::class, 'wishlistAddRemove'])->name('wishlist');
+
 });
 
 Route::resources([
@@ -52,4 +56,5 @@ Route::get('add', [CartController::class, 'index'])->name('add');
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
 Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
 Route::post('update-cart', [CartController::class, 'update'])->name('update-cart');
-Route::delete('remove-from-cart', [CartController::class, 'remove'])->name('remove-from-cart'); 
+Route::post('remove-from-cart', [CartController::class, 'remove'])->name('remove-from-cart'); 
+

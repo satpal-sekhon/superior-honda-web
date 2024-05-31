@@ -385,8 +385,8 @@
                                                             </a>
                                                         </li>
                                                         <li class="product__card--action__list">
-                                                            <a class="product__card--action__btn" title="Wishlist"
-                                                                href="wishlist.html">
+                                                            <a class="product__card--action__btn wishlist-btn" title="Wishlist" data-id="{{ $product->id }}"
+                                                                href="{{ route('wishlist', $product->id)}}">
                                                                 <svg class="product__card--action__btn--svg"
                                                                     width="18" height="18"
                                                                     viewBox="0 0 16 13" fill="none"
@@ -536,8 +536,8 @@
                                                             </a>
                                                         </li>
                                                         <li class="product__card--action__list">
-                                                            <a class="product__card--action__btn" title="Wishlist"
-                                                                href="wishlist.html">
+                                                            <a class="product__card--action__btn wishlist-btn" title="Wishlist" data-id="{{ $product->id }}"
+                                                                href="{{ route('wishlist', $product->id)}}">
                                                                 <svg class="product__card--action__btn--svg"
                                                                     width="18" height="18"
                                                                     viewBox="0 0 16 13" fill="none"
@@ -758,6 +758,3 @@
         <!-- End shipping section -->
 
     @endsection
-
-    <!-- Start footer section -->
-  

@@ -62,4 +62,18 @@ class WishlistController extends Controller
     {
         //
     }
+
+    public function wishlistAddRemove($productId)
+    {
+        if(Auth::user()) {
+            Wishlist::create([
+                'user_id' => Auth::id(),
+                'product_id' => $productId
+            ]);
+            return redirect()->back();
+        } else {
+            return redirect()->route('login');
+        }
+
+    }
 }
