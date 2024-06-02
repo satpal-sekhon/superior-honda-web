@@ -9,6 +9,7 @@ use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
@@ -28,6 +29,10 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
         'addresses' => AddressController::class,
         'vehicles'  => VehicleController::class,
     ]);
+
+    /************** Wishlist*****************/
+    Route::get('wishlist/{id}', [WishlistController::class, 'wishlistAddRemove'])->name('wishlist');
+
 });
 
 Route::resources([
@@ -46,4 +51,10 @@ Route::post('get-vehicle-brand', [ VehicleController::class, 'getVehicleBrand'])
 Route::post('get-vehicle-model', [ VehicleController::class, 'getVehicleModel']); // get vechicle models according to category
 Route::post('get-vehicle-model-variant', [VehicleController::class, 'getVehicleModelVariant']); //get vehicle model variant through model.
 
+/*******  Add To Cart  **********/
+Route::get('add', [CartController::class, 'index'])->name('add');  
+Route::get('cart', [CartController::class, 'cart'])->name('cart');
+Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+Route::post('update-cart', [CartController::class, 'update'])->name('update-cart');
+Route::post('remove-from-cart', [CartController::class, 'remove'])->name('remove-from-cart'); 
 
