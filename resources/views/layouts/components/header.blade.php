@@ -55,9 +55,11 @@
                     </a>
                 </div>
                 <div class="main__logo">
-                    <h1 class="main__logo--title"><a class="main__logo--link" href="#"><img
-                                class="main__logo--img" src="{{ asset('assets/images/logo/nav-log.webp') }}"
-                                alt="logo-img"></a></h1>
+                    <h1 class="main__logo--title">
+                        <a class="main__logo--link" href="#">
+                            <img class="main__logo--img" src="{{ asset('assets/images/logo/nav-log.webp') }}" alt="logo-img">
+                        </a>
+                    </h1>
                 </div>
                 <div class="header__search--widget d-none d-lg-block header__sticky--none">
                     <form class="d-flex header__search--form border-radius-5" action="#">
@@ -298,7 +300,7 @@
                     </div>
                     <div @class([
                         'dropdown__categories--menu border-radius-5 collapse',
-                        'show active' => Route::is('dashboard'),
+                        'show active' => Route::is('home'),
                     ]) id="categoriesAccordion">
                         <ul class="d-none d-lg-block">
                             <li class="categories__menu--items">
